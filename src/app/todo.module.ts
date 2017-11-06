@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 // Imports for loading & configuring the in-memory web api
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryTodosService } from './todo-in-memory-todos.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -29,8 +29,8 @@ import { TodoService } from './todo.service';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryTodosService),
+    HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryTodosService),
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -7,31 +7,30 @@ import { Todo } from './todo';
 
 @Injectable()
 export class TodoService {
-  private headers = new Headers({'Content-Type': 'application/json'});
   private todosUrl = 'api/todos';  // URL to web api
 
-  constructor(private http: Http) {}
+  constructor(private http: HttpClient) {}
 
   getTodos(): Promise<Todo[]> {
     return this.http.get(this.todosUrl)
       .toPromise()
       .then(
-        (response) => response.json() as Todo[]
+        (response) => response as Todo[]
       )
       .catch(this.handleError);
   }
 
   create(title: string): Promise<Todo> {
     return this.http
-      .post(this.todosUrl, JSON.stringify({title: title}), {headers: this.headers})
+      .post(this.todosUrl, JSON.stringify({title: title}))
       .toPromise()
-      .then(res => res.json() as Todo)
+      .then(res => res as Todo)
       .catch(this.handleError);
   }
 
   delete(id: number): Promise<void> {
     const url = `${this.todosUrl}/${id}`;
-    return this.http.delete(url, {headers: this.headers})
+    return this.http.delete(url)
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
