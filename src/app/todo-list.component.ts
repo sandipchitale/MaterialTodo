@@ -31,7 +31,7 @@ export class TodoListComponent implements OnInit {
   getTodos(): void {
     this.todoService
         .getTodos()
-        .then((todos) => {
+        .subscribe((todos) => {
           this.todos = todos;
         });
   }
@@ -40,10 +40,11 @@ export class TodoListComponent implements OnInit {
     this.title = this.title.trim();
     if (!this.title) { return; }
     this.todoService.create(this.title)
-      .then(todo => {
+      .subscribe(todo => {
         this.todos.push(todo);
         this.title = '';
-      });
+      },
+      this.handleError);
   }
 
   removeCompleted(): void {
@@ -57,9 +58,14 @@ export class TodoListComponent implements OnInit {
   removeTodo(todo: Todo): void {
     this.todoService
         .delete(todo.id)
-        .then(() => {
+        .subscribe(() => {
           this.todos = this.todos.filter(h => h !== todo);
-        });
+        },
+        this.handleError);
   }
 
+  private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
+  }
 }
