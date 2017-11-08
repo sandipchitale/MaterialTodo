@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class TodoComponent {
   title = 'Todo';
+
+  quit() {
+    window.close();
+  }
+
+  isElectron() {
+    return window && window['process'];
+  }
 }

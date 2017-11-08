@@ -1,4 +1,8 @@
-<mat-toolbar><mat-icon>check</mat-icon>&nbsp;&nbsp;{{title}}</mat-toolbar>
+<mat-toolbar class="drag">
+  <mat-icon>check</mat-icon>&nbsp;&nbsp;{{title}}
+  <span class="spacer"></span>
+  <mat-icon class="no-drag" *ngIf="isElectron()" (click)="quit()">clear</mat-icon>
+</mat-toolbar>
 <mddemo-todo-list></mddemo-todo-list>
 
 
