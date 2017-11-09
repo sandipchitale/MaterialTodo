@@ -26,6 +26,44 @@ Then open browser at http://localhost:4200
 ```
 ![Electron Material Todo](ElectronMaterialTodo.png)
 
+## Run in nginx docker container
+
+### Build
+
+```
+> ng build
+```
+
+This produces output in dist folder.
+
+### Dockerfile
+
+```
+FROM nginx:alpine
+COPY dist /usr/share/nginx/html
+```
+
+### Build docker image from Docker file
+
+```
+> docker build -t materialtodo .
+```
+
+### Run docker container
+
+```
+> docker run -d -p 4200:80 --name MaterialTodo materialtodo                                                                                                  9934d5a9513ad4f39c46bf65031962a92d7659fb162bcf5357fbc8a41308bf65
+```
+
+### Access MaterialTodo running in container
+
+```
+Launch browser with URL: http://<docker-machine-ip>:4200
+```
+
+
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
