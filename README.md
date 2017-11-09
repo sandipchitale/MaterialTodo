@@ -61,8 +61,18 @@ COPY dist /usr/share/nginx/html
 Launch browser with URL: http://<docker-machine-ip>:4200
 ```
 
+#### To obtain Docker machine IP address
 
+```
+> docker-machine ip
+192.168.99.100
+```
 
+so the URL to use above will be
+
+```
+http://192.168.99.100:4200
+```
 
 ## Development server
 
